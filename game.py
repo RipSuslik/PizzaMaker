@@ -1,7 +1,3 @@
-print("hello world")
-#from PIL import Image
-#img = Image.open("pizza.jpg")
-#img.show()
 import tkinter as tk
 root = tk.Tk()
 canvas = tk.Canvas(root, width=800, height=600, bg="white")
@@ -16,7 +12,6 @@ def on_press(event):
 def on_drag(event):
     global start_x, start_y
     dx, dy = event.x - start_x, event.y - start_y
-    #canvas.move(image_id, dx, dy)
     start_x, start_y = event.x, event.y  
 
 canvas.bind("<ButtonPress-1>", on_press)
@@ -25,7 +20,6 @@ start_x, start_y = 0, 0
 
 
 def update():
-    #print("next frame")
     canvas.create_rectangle(0, 0, 800, 600, fill="white")
     canvas.create_rectangle(622, 360, 630, 148, fill="purple")
     canvas.create_rectangle(3200, 360, 600, 1408, fill="blue")
@@ -38,4 +32,4 @@ def update():
 root.after(16, update)
 
 root.mainloop()
-#input()
+
