@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
 mikser_image = pygame.image.load('mikser.png')
-screen = pygame.display.set_mode((800, 600))
+screen = pygame.display.set_mode((1000, 1000))
 pygame.display.set_caption("PizzaMaker")
 mouse_x, mouse_y = 0, 0
 running = True
