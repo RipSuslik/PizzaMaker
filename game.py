@@ -9,6 +9,9 @@ screen = pygame.display.set_mode((1000, 1000))
 pygame.display.set_caption("PizzaMaker")
 mouse_x, mouse_y = 0, 0
 pizza_x, pizza_y = 450, 700
+cheeese_x, cheeese_y = 450, 700
+cheese_x, cheese_y = 450, 700
+tomatoes_x, tomatoes_y = 450, 700
 running = True
 mouse_down = False
 while running:
