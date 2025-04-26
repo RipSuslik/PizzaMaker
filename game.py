@@ -29,6 +29,8 @@ tomatoes_x, tomatoes_y = 1050, 700
 running = True
 mouse_down = False
 
+pizza_under_mouse = False
+
 pizza_selected = False
 cheeese_selected = False
 cheese_selected = False
@@ -42,6 +44,9 @@ while running:
             running = False
         elif current_event.type == pygame.MOUSEMOTION:
             mouse_x, mouse_y = pygame.mouse.get_pos()
+            pizza_under_mouse = False
+            if mouse_x > pizza_x and mouse_y > pizza_y and mouse_x < pizza_x + pizza_image.get_width() and mouse_y < pizza_y + pizza_image.get_height():
+                pizza_under_mouse = True    
         elif current_event.type == pygame.MOUSEBUTTONDOWN:
             mouse_down = True
         elif current_event.type == pygame.MOUSEBUTTONUP:
@@ -62,17 +67,10 @@ while running:
             elif current_event.key == pygame.K_4:
                 tomatoes_selected = True
 
-            """ elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                print("Left arrow pressed")
-            elif event.key == pygame.K_RIGHT:
-                print("Right arrow pressed")
-            elif event.key == pygame.K_SPACE:
-                print("Spacebar pressed")
-            else:
-                print(f"Key {event.key} pressed")"""
-
+     
+            # если нажата клавиша мыши то выбираем объект под ней
     #обрабатываем информацию 
+
     if mouse_down:
         if pizza_selected: 
             pizza_x, pizza_y = mouse_x, mouse_y
@@ -91,6 +89,23 @@ while running:
     screen.blit(cheeese_image, (cheeese_x, cheeese_y))  # Draw cheeese image     
     screen.blit(cheese_image, (cheese_x, cheese_y))  # Draw cheese image
     screen.blit(tomatoes_image, (tomatoes_x, tomatoes_y))  # Draw tomatoes image
+
+    icon = None
+    if pizza_selected:
+        icon = pygame.transform.scale(pizza_image,(100,100)) 
+    if cheeese_selected:
+        icon = pygame.transform.scale(cheeese_image,(100,100)) 
+    if cheese_selected:
+        icon = pygame.transform.scale(cheese_image,(100,100)) 
+    if tomatoes_selected:
+        icon = pygame.transform.scale(tomatoes_image,(100,100)) 
+
+    if icon != None:
+        screen.blit(icon, (50,50,100,100))
+    pygame.draw.rect(screen,(255,255,0),(50,50,100,100),3)
+
+    if pizza_under_mouse:
+        pygame.draw.rect(screen,(245,52,134),(pizza_x,pizza_y,pizza_image.get_width(),pizza_image.get_height()),3)
 
     pygame.display.flip()  # Update display
 pygame.quit()
