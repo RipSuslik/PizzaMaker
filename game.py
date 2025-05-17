@@ -40,6 +40,9 @@ def set_selected(game_objects, input):
         if input.pressed_key == obj.key:
             obj.selected = True
 
+        elif obj.under_mouse and input.mouse_down:
+            obj.selected = True        
+
 def move_selected_object(game_objects, input):
     if input.mouse_down: 
         for obj in game_objects:    
@@ -98,7 +101,6 @@ def run_game():
     while input.running:
         update_input(input) 
         
-                # если нажата клавиша мыши то выбираем объект под ней
         #обрабатываем информацию
 
         set_under_mouse(game_objects, input)
@@ -107,7 +109,7 @@ def run_game():
 
         move_selected_object(game_objects, input)                                        
 
-        #совершаем действия с игрой (картинками (пока что))
+        #рисуем кадр
         screen.fill((255, 255, 255))  # Clear background
 
         draw_all_objects(game_objects, screen)
