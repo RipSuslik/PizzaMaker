@@ -10,12 +10,50 @@ class Object:
     selected: bool
     under_mouse: bool
     key: str
-    
-def move_selected_object(game_objects, mouse_down, mouse_x, mouse_y):
-    if mouse_down: 
+                                                              
+@dataclass
+class Input:
+    mouse_pos = (0,0)
+    running = True
+    mouse_down = False 
+    pressed_key = None 
+
+def update_input(input):
+    events = pygame.event.get() #сохраняем в евентс события из pygame
+    for current_event in events:
+        if current_event.type == pygame.QUIT:
+            input.running = False
+        elif current_event.type == pygame.MOUSEMOTION:
+            input.mouse_pos = pygame.mouse.get_pos()        
+        elif current_event.type == pygame.MOUSEBUTTONDOWN:
+            input.mouse_down = True
+        elif current_event.type == pygame.MOUSEBUTTONUP:
+            input.mouse_down = False
+        elif current_event.type == pygame.KEYDOWN:
+            input.pressed_key = current_event.key
+
+def set_selected(game_objects, input): 
+    for obj in game_objects:    
+        obj.selected = False
+
+    for obj in game_objects:
+        if input.pressed_key == obj.key:
+            obj.selected = True
+
+def move_selected_object(game_objects, input):
+    if input.mouse_down: 
         for obj in game_objects:    
             if obj.selected: 
-                obj.pos = (mouse_x, mouse_y)
+                obj.pos = input.mouse_pos
+
+def set_under_mouse(game_objects, input):
+    for obj in game_objects:
+        obj.under_mouse = False
+        if (input.mouse_pos[0] > obj.pos[0]
+            and input.mouse_pos[1] > obj.pos[1]
+            and input.mouse_pos[0] < obj.pos[0] + obj.image.get_width()
+            and input.mouse_pos[1] < obj.pos[1] + obj.image.get_height()):
+            obj.under_mouse = True
 
 def draw_all_objects(game_objects, screen):
     for obj in game_objects:
@@ -55,46 +93,19 @@ def run_game():
     screen = pygame.display.set_mode((1000, 1000))
     pygame.display.set_caption("PizzaMaker")
 
-    mouse_x, mouse_y = 0, 0
+    input = Input()
 
-    running = True
-    mouse_down = False
-
-
-    while running: 
-        #получаем информацию с помощью get() от pygame
-        events = pygame.event.get() #сохраняем в евентс события из pygame
-        for current_event in events:
-            if current_event.type == pygame.QUIT:
-                running = False
-            elif current_event.type == pygame.MOUSEMOTION:
-                mouse_x, mouse_y = pygame.mouse.get_pos()
-                for obj in game_objects:
-                    obj.under_mouse = False
-                    if (mouse_x > obj.pos[0]
-                        and mouse_y > obj.pos[1]
-                        and mouse_x < obj.pos[0] + obj.image.get_width()
-                        and mouse_y < obj.pos[1] + obj.image.get_height()):
-                        obj.under_mouse = True    
-            elif current_event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_down = True
-            elif current_event.type == pygame.MOUSEBUTTONUP:
-                mouse_down = False
-            elif current_event.type == pygame.KEYDOWN:
-                
-                for obj in game_objects:    
-                    obj.selected = False
-
-                for obj in game_objects:
-                    if current_event.key == obj.key:
-                        obj.selected = True
-            
-
+    while input.running:
+        update_input(input) 
         
                 # если нажата клавиша мыши то выбираем объект под ней
         #обрабатываем информацию
-        
-        move_selected_object(game_objects, mouse_down, mouse_x, mouse_y)                                        
+
+        set_under_mouse(game_objects, input)
+
+        set_selected(game_objects, input)
+
+        move_selected_object(game_objects, input)                                        
 
         #совершаем действия с игрой (картинками (пока что))
         screen.fill((255, 255, 255))  # Clear background
@@ -103,7 +114,6 @@ def run_game():
         
         draw_icon(game_objects, screen)
 
-        
         draw_rect(game_objects, screen)
 
         pygame.display.flip()  # Update display
