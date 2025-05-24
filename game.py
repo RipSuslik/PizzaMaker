@@ -4,19 +4,30 @@ import pygame
 pygame.init()
 
 @dataclass
+class Coordinate:
+    x: int
+    y: int 
+
+@dataclass
 class Object:
     image: any
-    pos: tuple[int,int]  
+    pos: Coordinate  
     selected: bool
     under_mouse: bool
     key: str
                                                               
 @dataclass
 class Input:
-    mouse_pos = (0,0)
+    mouse_pos = Coordinate(0, 0)
     running = True
     mouse_down = False 
-    pressed_key = None 
+    pressed_key = None
+
+def create_coordinate(tuple):
+    return Coordinate(tuple[0], tuple[1])
+
+def create_tuple(coord):
+    return (coord.x, coord.y)
 
 def update_input(input):
     events = pygame.event.get() #сохраняем в евентс события из pygame
@@ -24,7 +35,7 @@ def update_input(input):
         if current_event.type == pygame.QUIT:
             input.running = False
         elif current_event.type == pygame.MOUSEMOTION:
-            input.mouse_pos = pygame.mouse.get_pos()        
+            input.mouse_pos = create_coordinate(pygame.mouse.get_pos())        
         elif current_event.type == pygame.MOUSEBUTTONDOWN:
             input.mouse_down = True
         elif current_event.type == pygame.MOUSEBUTTONUP:
@@ -52,15 +63,15 @@ def move_selected_object(game_objects, input):
 def set_under_mouse(game_objects, input):
     for obj in game_objects:
         obj.under_mouse = False
-        if (input.mouse_pos[0] > obj.pos[0]
-            and input.mouse_pos[1] > obj.pos[1]
-            and input.mouse_pos[0] < obj.pos[0] + obj.image.get_width()
-            and input.mouse_pos[1] < obj.pos[1] + obj.image.get_height()):
+        if (input.mouse_pos.x > obj.pos.x
+            and input.mouse_pos.y > obj.pos.y
+            and input.mouse_pos.x < obj.pos.x + obj.image.get_width()
+            and input.mouse_pos.y < obj.pos.y + obj.image.get_height()):
             obj.under_mouse = True
 
 def draw_all_objects(game_objects, screen):
     for obj in game_objects:
-        screen.blit(obj.image, obj.pos)
+        screen.blit(obj.image, create_tuple(obj.pos))
         
 def draw_icon(game_objects, screen):
     icon = None 
@@ -78,19 +89,19 @@ def draw_rect(game_objects, screen):
             pygame.draw.rect(
                 screen,
                 (245,52,134),
-                (obj.pos[0],
-                obj.pos[1],
+                (obj.pos.x,
+                obj.pos.y,
                 obj.image.get_width(),
                 obj.image.get_height()),
                 3)
 
 def run_game():
     game_objects = [
-        Object(pygame.image.load('mikser.png'),(450,550), False, False, ""), 
-        Object(pygame.image.load('pizza.png'),(500,50), False, False, pygame.K_1),
-        Object(pygame.image.load('cheeese.png'),(15,0), False, False, pygame.K_2),
-        Object(pygame.image.load('cheese.png'),(0,300), False, False, pygame.K_3),
-        Object(pygame.image.load('tomatoes.png'),(30,600), False, False, pygame.K_4)
+        Object(pygame.image.load('mikser.png'), Coordinate(450, 550), False, False, ""), 
+        Object(pygame.image.load('pizza.png'), Coordinate(500, 50), False, False, pygame.K_1),
+        Object(pygame.image.load('cheeese.png'), Coordinate(15, 0), False, False, pygame.K_2),
+        Object(pygame.image.load('cheese.png'), Coordinate(0, 300), False, False, pygame.K_3),
+        Object(pygame.image.load('tomatoes.png'), Coordinate(30, 600), False, False, pygame.K_4)
     ]
 
     screen = pygame.display.set_mode((1000, 1000))
