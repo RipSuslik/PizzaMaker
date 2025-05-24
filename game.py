@@ -15,7 +15,9 @@ class Object:
     selected: bool
     under_mouse: bool
     key: str
-                                                              
+    mouse_offset = Coordinate(0, 0)
+
+
 @dataclass
 class Input:
     mouse_pos = Coordinate(0, 0)
@@ -25,6 +27,12 @@ class Input:
 
 def create_coordinate(tuple):
     return Coordinate(tuple[0], tuple[1])
+
+def add_coordinate(c1, c2):
+    return Coordinate(c1.x + c2.x, c1.y + c2.y)
+
+def substract_coordinate(c1, c2):
+    return Coordinate(c1.x - c2.x, c1.y - c2.y)
 
 def create_tuple(coord):
     return (coord.x, coord.y)
@@ -44,21 +52,20 @@ def update_input(input):
             input.pressed_key = current_event.key
 
 def set_selected(game_objects, input): 
-    for obj in game_objects:    
-        obj.selected = False
-
     for obj in game_objects:
-        if input.pressed_key == obj.key:
-            obj.selected = True
-
-        elif obj.under_mouse and input.mouse_down:
+        if not input.mouse_down:
+            obj.selected = False
+        elif obj.under_mouse:
+            if not obj.selected:
+                obj.mouse_offset = substract_coordinate(input.mouse_pos, obj.pos)
             obj.selected = True        
+            
 
 def move_selected_object(game_objects, input):
     if input.mouse_down: 
         for obj in game_objects:    
             if obj.selected: 
-                obj.pos = input.mouse_pos
+                obj.pos = substract_coordinate(input.mouse_pos, obj.mouse_offset)
 
 def set_under_mouse(game_objects, input):
     for obj in game_objects:
