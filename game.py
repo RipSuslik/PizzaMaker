@@ -11,12 +11,13 @@ class Coordinate:
 @dataclass
 class Object:
     image: any
-    pos: Coordinate  
-    selected: bool
-    under_mouse: bool
-    key: str
+    pos: Coordinate 
+    key: str 
+    selected = False
+    under_mouse = False 
     mouse_offset = Coordinate(0, 0)
     visible = False
+    scale = 0.3
 
 @dataclass
 class Input:
@@ -78,14 +79,15 @@ def set_under_mouse(game_objects, input):
         obj.under_mouse = False
         if (input.mouse_pos.x > obj.pos.x
             and input.mouse_pos.y > obj.pos.y
-            and input.mouse_pos.x < obj.pos.x + obj.image.get_width()
-            and input.mouse_pos.y < obj.pos.y + obj.image.get_height()):
+            and input.mouse_pos.x < obj.pos.x + obj.image.get_width() * obj.scale
+            and input.mouse_pos.y < obj.pos.y + obj.image.get_height() * obj.scale):
             obj.under_mouse = True
 
 def draw_all_visible_objects(game_objects, screen):
     for obj in game_objects:
         if obj.visible:
-            screen.blit(obj.image, create_tuple(obj.pos))
+            scaled_image = pygame.transform.scale(obj.image,(obj.image.get_width() * obj.scale,obj.image.get_height() * obj.scale))
+            screen.blit(scaled_image, create_tuple(obj.pos))
         
 
 def draw_icon(game_objects, screen):
@@ -106,25 +108,25 @@ def draw_rect(game_objects, screen):
                 (245,52,134),
                 (obj.pos.x,
                 obj.pos.y,
-                obj.image.get_width(),
-                obj.image.get_height()),
+                obj.image.get_width() * obj.scale,
+                obj.image.get_height() * obj.scale) ,
                 3)
 
 def run_game():
     game_objects = [ 
-        Object(pygame.image.load('pizza.png'), Coordinate(500, 50), False, False, pygame.K_1),
-        Object(pygame.image.load('cheeese.png'), Coordinate(15, 0), False, False, pygame.K_2),
-        Object(pygame.image.load('cheese.png'), Coordinate(0, 300), False, False, pygame.K_3),
-        Object(pygame.image.load('tomatoes.png'), Coordinate(30, 600), False, False, pygame.K_4),
-        Object(pygame.image.load('колбаса.png'), Coordinate(30, 600), False, False, pygame.K_5),
-        Object(pygame.image.load('нож.png'), Coordinate(30, 600), False, False, pygame.K_e),
-        Object(pygame.image.load('основа_с_колбасой.png'), Coordinate(30, 600), False, False, pygame.K_8),
-        Object(pygame.image.load('основа_с_сыром_и_колбасой.png'), Coordinate(30, 600), False, False, pygame.K_9),
-        Object(pygame.image.load('основа_с_сыром.png'), Coordinate(30, 600), False, False, pygame.K_7),
-        Object(pygame.image.load('основа.png'), Coordinate(30, 600), False, False, pygame.K_6),
-        Object(pygame.image.load('печь.png'), Coordinate(30, 600), False, False, ""),
-        Object(pygame.image.load('терка.png'), Coordinate(30, 600), False, False, pygame.K_q),
-        Object(pygame.image.load('тесто.png'), Coordinate(30, 600), False, False, pygame.K_r)
+        Object(pygame.image.load('pizza.png'), Coordinate(500, 50), pygame.K_1),
+        Object(pygame.image.load('cheeese.png'), Coordinate(15, 0), pygame.K_2),
+        Object(pygame.image.load('cheese.png'), Coordinate(0, 300), pygame.K_3),
+        Object(pygame.image.load('tomatoes.png'), Coordinate(30, 600), pygame.K_4),
+        Object(pygame.image.load('колбаса.png'), Coordinate(30, 600), pygame.K_5),
+        Object(pygame.image.load('нож.png'), Coordinate(30, 600), pygame.K_e),
+        Object(pygame.image.load('основа_с_колбасой.png'), Coordinate(30, 600), pygame.K_8),
+        Object(pygame.image.load('основа_с_сыром_и_колбасой.png'), Coordinate(30, 600), pygame.K_9),
+        Object(pygame.image.load('основа_с_сыром.png'), Coordinate(30, 600), pygame.K_7),
+        Object(pygame.image.load('основа.png'), Coordinate(30, 600), pygame.K_6),
+        Object(pygame.image.load('печь.png'), Coordinate(30, 600), ""),
+        Object(pygame.image.load('терка.png'), Coordinate(30, 600), pygame.K_q),
+        Object(pygame.image.load('тесто.png'), Coordinate(30, 600), pygame.K_r)
     ]
 
     screen = pygame.display.set_mode((1000, 1000))
