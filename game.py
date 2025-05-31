@@ -16,7 +16,7 @@ class Object:
     under_mouse: bool
     key: str
     mouse_offset = Coordinate(0, 0)
-
+    visible = False
 
 @dataclass
 class Input:
@@ -51,6 +51,12 @@ def update_input(input):
         elif current_event.type == pygame.KEYDOWN:
             input.pressed_key = current_event.key
 
+def show_object(game_objects, input):
+    for obj in game_objects:
+        if input.pressed_key == obj.key:
+            obj.visible = True
+            obj.pos = input.mouse_pos
+
 def set_selected(game_objects, input): 
     for obj in game_objects:
         if not input.mouse_down:
@@ -76,10 +82,12 @@ def set_under_mouse(game_objects, input):
             and input.mouse_pos.y < obj.pos.y + obj.image.get_height()):
             obj.under_mouse = True
 
-def draw_all_objects(game_objects, screen):
+def draw_all_visible_objects(game_objects, screen):
     for obj in game_objects:
-        screen.blit(obj.image, create_tuple(obj.pos))
+        if obj.visible:
+            screen.blit(obj.image, create_tuple(obj.pos))
         
+
 def draw_icon(game_objects, screen):
     icon = None 
     for obj in game_objects:
@@ -92,7 +100,7 @@ def draw_icon(game_objects, screen):
 
 def draw_rect(game_objects, screen):
     for obj in game_objects:
-        if obj.under_mouse:
+        if obj.under_mouse and obj.visible:         
             pygame.draw.rect(
                 screen,
                 (245,52,134),
@@ -103,12 +111,20 @@ def draw_rect(game_objects, screen):
                 3)
 
 def run_game():
-    game_objects = [
-        Object(pygame.image.load('mikser.png'), Coordinate(450, 550), False, False, ""), 
+    game_objects = [ 
         Object(pygame.image.load('pizza.png'), Coordinate(500, 50), False, False, pygame.K_1),
         Object(pygame.image.load('cheeese.png'), Coordinate(15, 0), False, False, pygame.K_2),
         Object(pygame.image.load('cheese.png'), Coordinate(0, 300), False, False, pygame.K_3),
-        Object(pygame.image.load('tomatoes.png'), Coordinate(30, 600), False, False, pygame.K_4)
+        Object(pygame.image.load('tomatoes.png'), Coordinate(30, 600), False, False, pygame.K_4),
+        Object(pygame.image.load('колбаса.png'), Coordinate(30, 600), False, False, pygame.K_5),
+        Object(pygame.image.load('нож.png'), Coordinate(30, 600), False, False, pygame.K_e),
+        Object(pygame.image.load('основа_с_колбасой.png'), Coordinate(30, 600), False, False, pygame.K_8),
+        Object(pygame.image.load('основа_с_сыром_и_колбасой.png'), Coordinate(30, 600), False, False, pygame.K_9),
+        Object(pygame.image.load('основа_с_сыром.png'), Coordinate(30, 600), False, False, pygame.K_7),
+        Object(pygame.image.load('основа.png'), Coordinate(30, 600), False, False, pygame.K_6),
+        Object(pygame.image.load('печь.png'), Coordinate(30, 600), False, False, ""),
+        Object(pygame.image.load('терка.png'), Coordinate(30, 600), False, False, pygame.K_q),
+        Object(pygame.image.load('тесто.png'), Coordinate(30, 600), False, False, pygame.K_r)
     ]
 
     screen = pygame.display.set_mode((1000, 1000))
@@ -121,6 +137,8 @@ def run_game():
         
         #обрабатываем информацию
 
+        show_object(game_objects, input)
+
         set_under_mouse(game_objects, input)
 
         set_selected(game_objects, input)
@@ -130,7 +148,7 @@ def run_game():
         #рисуем кадр
         screen.fill((255, 255, 255))  # Clear background
 
-        draw_all_objects(game_objects, screen)
+        draw_all_visible_objects(game_objects, screen)
         
         draw_icon(game_objects, screen)
 
