@@ -1,8 +1,11 @@
+import random
+
+
 def hi():
     print("hello world") #pechatayem
 
 #вывод переменных
-def box_and_notbox():
+def variables():
     korobka = 5 
 
     NeCorobka = True
@@ -45,6 +48,25 @@ def calculator():
 
     print("Сумма равна: ", Result)
 
+def random_number():
+    number = random.randint(1, 10)
+    print(number)
+
+def guess_what():
+    number = random.randint(1, 10)
+    life = 3
+    while life > 0:
+        my_choice = int(input("Какой ваш выбор? "))
+        if number == my_choice:
+            print("You win")
+            break
+        else:
+            life = life - 1
+            if life == 0:
+                print("You have no more lifes, you lose, answer was " + str(number))
+            else:
+                print("You have " + str(life) + " more lifes")
+
 running = True
 while running:
     print("=== Menu ===")
@@ -53,6 +75,8 @@ while running:
     print("\t3 - Simple calculator")
     print("\t4 - Box and something")
     print("\t5 - Your name")
+    print("\t6 - Randomizer")
+    print("\t7 - Guess what?")
     print("\t0 - Exit")
 
     choice = input("Write your choice: ")
@@ -71,10 +95,16 @@ while running:
             simple_calculator()
         elif choice == "4":
             print("=== Box and something ===")
-            box_and_notbox()
+            variables()
         elif choice == "5":
             print("=== Your name ===")
             your_name()
+        elif choice == "6":
+            print("=== Randomizer ===")
+            random_number()
+        elif choice == "7":
+            print("=== Guess what? ===")
+            guess_what()
         else:
             print("Error")
 
