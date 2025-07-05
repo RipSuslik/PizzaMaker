@@ -67,16 +67,47 @@ def guess_what():
             else:
                 print("You have " + str(life) + " more lifes")
 
+def guess_what_advanced():
+    number = random.randint(1, 100)
+    life = 6
+    while life > 0:
+        my_choice = int(input("Какой ваш выбор? (от 0 до 100) "))
+        if my_choice > 100:
+            print("Know the rules! You loose!")
+            break
+
+        if number == my_choice:
+            print("You win")
+            break
+        else:
+            if number < my_choice:
+                print("Less")
+            if number > my_choice:
+                print("More")
+
+            life = life - 1
+            if life == 0:
+                print("You have no more lifes, you lose, answer was " + str(number))
+            else:
+                print("You have " + str(life) + " more lifes")
+
 running = True
 while running:
     print("=== Menu ===")
-    print("\t1 - Calculator")
-    print("\t2 - Print Hello World")
-    print("\t3 - Simple calculator")
-    print("\t4 - Box and something")
-    print("\t5 - Your name")
-    print("\t6 - Randomizer")
-    print("\t7 - Guess what?")
+    menu_items = [
+        {"name":"Calculator", "command": "cl", "program": calculator},
+        {"name":"Print Hello World", "command": "hw", "program": hi},
+        {"name":"Simple calculator", "command": "scl", "program": simple_calculator},
+        {"name":"Box and something", "command": "box", "program": variables},
+        {"name":"Your name", "command": "nm", "program": your_name},
+        {"name":"Randomizer", "command": "rnd", "program": random_number},
+        {"name":"Guess what?", "command": "gw", "program": guess_what},
+        {"name":"Guess what? Advanced", "command": "gwa", "program": guess_what_advanced}
+    ]
+    
+    for item in menu_items:
+        print("\t[" + str(item["command"]) + "] - " + str(item["name"]))
+
     print("\t0 - Exit")
 
     choice = input("Write your choice: ")
@@ -84,29 +115,10 @@ while running:
     if choice == "0":
         running = False
     else:
-        if choice == "1":
-            print("=== Calculator ===")
-            calculator()
-        elif choice == "2":
-            print("=== Print Hello World ===")
-            hi()
-        elif choice == "3":
-            print("=== Simple calculator ===")
-            simple_calculator()
-        elif choice == "4":
-            print("=== Box and something ===")
-            variables()
-        elif choice == "5":
-            print("=== Your name ===")
-            your_name()
-        elif choice == "6":
-            print("=== Randomizer ===")
-            random_number()
-        elif choice == "7":
-            print("=== Guess what? ===")
-            guess_what()
-        else:
-            print("Error")
+        for item in menu_items:
+            if choice == item["command"]:
+                print("=== " + item["name"] + " ===")
+                item["program"]()
 
 
 
