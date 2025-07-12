@@ -91,6 +91,32 @@ def guess_what_advanced():
             else:
                 print("You have " + str(life) + " more lifes")
 
+def print_list_while():
+    numbers = [32, 10, 87, 1, 64, 6]
+
+    i = 0
+    while i < len(numbers):
+        number = numbers[i]
+        print(number)
+        i = i + 1
+
+def print_list_for():
+    numbers = [32, 10, 87, 1, 64, 6]
+
+    for number in numbers:
+        print(number)
+
+
+def print_reversed_list_while():
+    numbers = [32, 10, 87, 1, 64, 6]
+
+    i = len(numbers) - 1
+    while i >= 0:
+        number = numbers[i]
+        print(number)
+        i = i - 1
+
+
 running = True
 while running:
     print("=== Menu ===")
@@ -102,9 +128,12 @@ while running:
         {"name":"Your name", "command": "nm", "program": your_name},
         {"name":"Randomizer", "command": "rnd", "program": random_number},
         {"name":"Guess what?", "command": "gw", "program": guess_what},
-        {"name":"Guess what? Advanced", "command": "gwa", "program": guess_what_advanced}
+        {"name":"Guess what? Advanced", "command": "gwa", "program": guess_what_advanced},
+        {"name":"Print list (while)", "command": "plw", "program": print_list_while},
+        {"name":"Print list (for)", "command": "plf", "program": print_list_for},
+        {"name":"Print reversed list (while)", "command": "rev", "program": print_reversed_list_while}
     ]
-    
+
     for item in menu_items:
         print("\t[" + str(item["command"]) + "] - " + str(item["name"]))
 
