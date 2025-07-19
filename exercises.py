@@ -116,6 +116,36 @@ def print_reversed_list_while():
         print(number)
         i = i - 1
 
+def print_random_list():
+    n = 6
+    i = 1
+    while i <= n:
+        print(random.randint(1, 100), end=" ")
+        i = i + 1
+    print()
+
+def find_max_number(numbers):
+    max = numbers[0]
+
+    i = 1
+    while i < len(numbers):
+        if numbers[i] > max:
+            max = numbers[i]
+        i = i + 1
+
+    return max
+
+def max_number():
+    n = 12
+    i = 0
+    numbers = []
+    while i < n:
+        numbers.append(random.randint(1, 100))
+        i = i + 1
+    
+    print(numbers)
+    max = find_max_number(numbers)
+    print("Max number: " + str(max))
 
 running = True
 while running:
@@ -131,7 +161,9 @@ while running:
         {"name":"Guess what? Advanced", "command": "gwa", "program": guess_what_advanced},
         {"name":"Print list (while)", "command": "plw", "program": print_list_while},
         {"name":"Print list (for)", "command": "plf", "program": print_list_for},
-        {"name":"Print reversed list (while)", "command": "rev", "program": print_reversed_list_while}
+        {"name":"Print reversed list (while)", "command": "rev", "program": print_reversed_list_while},
+        {"name":"Max number in list", "command": "max", "program": max_number}, 
+        {"name":"Print random numbers", "command": "rl", "program": print_random_list}
     ]
 
     for item in menu_items:
@@ -146,8 +178,10 @@ while running:
     else:
         for item in menu_items:
             if choice == item["command"]:
+                print()
                 print("=== " + item["name"] + " ===")
                 item["program"]()
+                print()
 
 
 
