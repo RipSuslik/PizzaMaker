@@ -16,7 +16,7 @@ def variables():
 
     print (korobka, NeCorobka, ChtoTo, EschheChtoTo)
 
-#Calculator
+#Calculator (to do low lvl!!11!)
 def simple_calculator():
     Neznay = 10
 
@@ -91,7 +91,7 @@ def guess_what_advanced():
             else:
                 print("You have " + str(life) + " more lifes")
 
-def print_list_while():
+def print_list_while(): # to do (low lvl !!11!)
     numbers = [32, 10, 87, 1, 64, 6]
 
     i = 0
@@ -138,7 +138,7 @@ def find_max_number(numbers):
 def max_number():
     n = 12
     i = 0
-    numbers = []
+    numbers = []                                                                                                                                                                                  
     while i < n:
         numbers.append(random.randint(1, 100))
         i = i + 1
@@ -146,6 +146,28 @@ def max_number():
     print(numbers)
     max = find_max_number(numbers)
     print("Max number: " + str(max))
+
+def count_numbers():
+    numbers = [32, 10, 87, 1, 64, 6]
+    i = 0
+    while i < len(numbers):       
+        i = i + 1
+    print (i)
+
+def count_numbers_low_lvl():
+    memory = [0,0,0,0,0,0,0,0,0,0]
+    offset_numbers = 0
+    memory[offset_numbers + 0] = 32
+    memory[offset_numbers + 1] = 10
+    memory[offset_numbers + 2] = 87
+    memory[offset_numbers + 3] = 1
+    memory[offset_numbers + 4] = 64
+    memory[offset_numbers + 5] = 6
+    offset_i = 6
+    memory[offset_i] = 0
+    while memory[offset_i] < 6:       
+        memory[offset_i] = memory[offset_i] + 1
+    print (memory[offset_i])
 
 running = True
 while running:
@@ -163,7 +185,9 @@ while running:
         {"name":"Print list (for)", "command": "plf", "program": print_list_for},
         {"name":"Print reversed list (while)", "command": "rev", "program": print_reversed_list_while},
         {"name":"Max number in list", "command": "max", "program": max_number}, 
-        {"name":"Print random numbers", "command": "rl", "program": print_random_list}
+        {"name":"Print random numbers", "command": "rl", "program": print_random_list},
+        {"name":"Print count numbers", "command": "cn", "program": count_numbers},
+        {"name":"Print count numbers (low lvl)", "command": "cnll", "program": count_numbers_low_lvl}
     ]
 
     for item in menu_items:
