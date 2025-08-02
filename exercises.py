@@ -1,5 +1,11 @@
 import random
-
+# to do сделать стр массивом односимвольных строк
+def hi_ll():         
+    str = "hello world"
+    print_ll(str)
+# to do вывести инпут поэлементно (поячеечно)
+def print_ll(input):
+    print (str) 
 
 def hi():
     print("hello world") #pechatayem
@@ -10,13 +16,25 @@ def variables():
 
     NeCorobka = True
 
-    ChtoTo = "stroka" 
+    ChtoTo = "stroka"     
 
     EschheChtoTo = 'gegegegege'
 
     print (korobka, NeCorobka, ChtoTo, EschheChtoTo)
 
 #Calculator (to do low lvl!!11!)
+def simple_calculator_ll():
+    offset_shtuka_raz = 0
+    offset_shtuka_dva = 1
+    offset_shtuka_tri = 2
+    memory = [0,0,0,0,0,0,0,0,0]
+    
+    memory[offset_shtuka_raz] = 10
+    memory[offset_shtuka_dva] = 12
+    memory[offset_shtuka_tri] = 0
+    memory[offset_shtuka_tri] = memory[offset_shtuka_raz] + memory[offset_shtuka_dva]
+    print (memory[offset_shtuka_tri])
+
 def simple_calculator():
     Neznay = 10
 
@@ -91,11 +109,41 @@ def guess_what_advanced():
             else:
                 print("You have " + str(life) + " more lifes")
 
+def print_list_while_ll():
+    memory = [0,0,0,0,0,0,0,0,0,0]
+    # numbers = [32, 10, 87, 1, 64, 6] 
+    offset_numbers = 0
+    memory[offset_numbers + 0] = 32
+    memory[offset_numbers + 1] = 10
+    memory[offset_numbers + 2] = 87
+    memory[offset_numbers + 3] = 1
+    memory[offset_numbers + 4] = 64
+    memory[offset_numbers + 5] = 6
+    
+    # i = 0
+    offset_i = 6
+    memory[offset_i] = 0
+    
+    # while i < len(numbers):
+    while memory[offset_i] < 6:
+        
+        # number = numbers[i]
+        offset_number = 7
+        offset_numbers_i = offset_numbers + memory[offset_i]
+        memory[offset_number] = memory[offset_numbers_i]
+
+        # print(number)
+        print (memory[offset_number])
+        
+        # i = i + 1
+        memory[offset_i] = memory[offset_i] + 1
+
+
 def print_list_while(): # to do (low lvl !!11!)
     numbers = [32, 10, 87, 1, 64, 6]
 
     i = 0
-    while i < len(numbers):
+    while i < len(numbers): 
         number = numbers[i]
         print(number)
         i = i + 1
@@ -187,7 +235,9 @@ while running:
         {"name":"Max number in list", "command": "max", "program": max_number}, 
         {"name":"Print random numbers", "command": "rl", "program": print_random_list},
         {"name":"Print count numbers", "command": "cn", "program": count_numbers},
-        {"name":"Print count numbers (low lvl)", "command": "cnll", "program": count_numbers_low_lvl}
+        {"name":"Print count numbers (low lvl)", "command": "cnll", "program": count_numbers_low_lvl},
+        {"name":"Simple Calculator (low lvl)", "command": "scll", "program": simple_calculator_ll},
+        {"name":" Print List (low lvl)", "command": "plll", "program": print_list_while_ll}
     ]
 
     for item in menu_items:
