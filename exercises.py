@@ -1,14 +1,35 @@
 import random
 # to do сделать стр массивом односимвольных строк
 def hi_ll():         
-    str = "hello world"
-    print_ll(str)
+    list = ["h","e","l","l","o"," ","w","o","r","l","d"]
+    print_ll(list)
+    
 # to do вывести инпут поэлементно (поячеечно)
 def print_ll(input):
-    print (str) 
+    i = 0
+    while i < 11:
+        print(i)    
+    
+    
 
+
+def hi_bin():
+    #0b #pechatayem
+    #bin = 0b01110000_01110010_01101001_01101110_01110100_00100000_00101000_00100010_01101000_01100101_01101100_01101100_01101111_00100000_01110111_01101111_01110010_01101100_01100100_00100010_00101001
+    bin_list = [0b01110000, 0b01110010, 0b01101001, 0b01101110, 0b01110100, 0b00100000, 0b00101000, 0b00100010, 0b01101000, 0b01100101, 0b01101100, 0b01101100, 0b01101111, 0b00100000, 0b01110111, 0b01101111, 0b01110010, 0b01101100, 0b01100100, 0b00100010, 0b00101001]
+    #print ("print (\"hello world\")")
+    #exec ("print (\"hello world\")")
+    #print (bin)
+    #print (bin_list)
+    command = "" 
+    for bbin in bin_list:
+        #print (chr(bbin))
+        command = command + chr(bbin)
+    #print(command)
+    exec (command)
 def hi():
-    print("hello world") #pechatayem
+    print ("hello world")
+
 
 #вывод переменных
 def variables():
@@ -222,7 +243,9 @@ while running:
     print("=== Menu ===")
     menu_items = [
         {"name":"Calculator", "command": "cl", "program": calculator},
-        {"name":"Print Hello World", "command": "hw", "program": hi},
+        {"name":"Print hello world low lvl", "command": "hwll", "program": hi_ll},
+        {"name":"Print Hello World ", "command": "hw", "program": hi},
+        {"name":"Print Hello World Binary", "command": "hwb", "program": hi_bin},
         {"name":"Simple calculator", "command": "scl", "program": simple_calculator},
         {"name":"Box and something", "command": "box", "program": variables},
         {"name":"Your name", "command": "nm", "program": your_name},
