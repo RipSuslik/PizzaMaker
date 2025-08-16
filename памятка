@@ -1,0 +1,45 @@
+#что я знаю о питоне
+#1. actions
+print("text")
+bool("True") #True/False
+str(123) #придает строковое значение (вернет "123")
+len("slovo") #количество элементов в списке (вернет 5)
+int("123") # как str только в числа (вернет 123 как число)
+input() #вернет строку от пользователя
+exec("print()") #выполняет код в строке 
+chr(65) #вернет символ "А"
++ - * / ^ #вычисления
+<= >= < > != == #сравнение
+and or not #логчические действия
+if while for #служебные слова
+a = 3
+b = 1
+c = 2
+a > b and a > c
+a = b + c
+#2. variables
+thing = True
+#True сохранено в something
+something = thing 
+# чтение из thing и запись в something 
+#3. massive
+memory = [1, 2, 3, 4, 5]
+#обращение
+memory[0] # вернёт 1
+memory[4] = 100 #мемори теперь [1, 2, 3, 4, 100]
+#1 of them
+                          #for
+for memory_obj in memory:
+    print(memory_obj)
+#  это было обращение
+
+                          #while
+i = 0
+while i < len(memory):
+    memory_obj = memory[i]
+    i = i + 1
+    
+
+
+
+
