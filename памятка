@@ -56,74 +56,23 @@ def give_par(a):
 
 def give_five():
     return 5
-def inc(a):
-    return a + 1
-
-def dec(a):
-    return a - 1
-
-def give_sum(a, b): #to do переписать не использовать +
-    print(a)
-    print(b)
-    i = 0
-    c = a
-    while i < b:
-        i = inc(i) 
-        c = inc(c)       
-    return c
-
-res = give_sum(2, 3) #res = 5
-res = give_sum(20, 1) #res = 21
-
-def give_product(a, b): # произведение a и b
-    i = 0
-    s = 0
-    while i < b
-        i = give_sum(i, 1)
-        s = give_sum(a, s)
-    return s   
-
-result = give_product(5, 4)
-
-def give_sub(a, b):
-    print(a)
-    print(b)
-    i = 0
-    c = a
-    while i < b
-        i = inc(i)
-        c = dec(c)
-    return c
-def give_div(a, b):
-    print(a)
-    print(b)
-    i = 1
-    c = b
-    while i < a: 
-        i = inc(i)
-        c = give_sum(c, b)
-        if c > a:
-            i = dec(i)
-            return i
-        if c == a:
-            return i 
-
 
 #if/elif (возвращают условие (+цикл))
 e = 5
 i = 6
-1 пример
+#1 пример
 e = 5
-if e < i
-    i + 1 
-    elif print(i)
+if e < i:
+    e = e + 1 
+elif:
+    print(e)
 print(e) #теперь e это 6 с помощью if
 i = 10
 e = 12
 o = 20
-while i < o
-    i + 1
-print (e) #так мы выведем 10 раз e
+while i < o:
+    i = i + 1
+    print (e) #так мы выведем 10 раз e
 
 
 
