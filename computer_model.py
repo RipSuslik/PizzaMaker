@@ -62,25 +62,25 @@ def give_sum(a, b): #to do переписать не использовать +
         c = inc(c)       
     return c
 
-res = give_sum(2, 3) #res = 5
-res = give_sum(20, 1) #res = 21
+#res = give_sum(2, 3) #res = 5
+#res = give_sum(20, 1) #res = 21
 
 def give_product(a, b): # произведение a и b
     i = 0
     s = 0
-    while i < b
+    while i < b:
         i = give_sum(i, 1)
         s = give_sum(a, s)
     return s   
 
-result = give_product(5, 4)
+#result = give_product(5, 4)
 
 def give_sub(a, b):
     print(a)
     print(b)
     i = 0
     c = a
-    while i < b
+    while i < b:
         i = inc(i)
         c = dec(c)
     return c
@@ -97,3 +97,38 @@ def give_div(a, b):
             return i
         if c == a:
             return i 
+        
+def turn_on_hardware():
+    print("включение материнской платы")
+    print("включение процессора")
+    print("включение оперативной памяти")
+    print("включение сетевой карты")
+    print("включение жесткого диска")
+    print("включение кулера")
+    print("включение видеокарты")
+    print("включение клавиатуры")
+    print("включение мышки")
+    print("включение дисплея")
+
+
+def start_computer():
+    turn_on_hardware()
+    print("загрузка ОС")
+    print("авторизация пользователя")
+    user_authorized = False
+    while not user_authorized:
+        password_input = input("введите пароль: ")
+        password = "12345"
+        if password_input == password:
+            print("добро пожаловать")
+            user_authorized = True
+        else: 
+            print("неправильный пароль попробуйте еще раз")
+        
+    print("загрузка учетной записи")
+    print("выбор приложения")
+    print("запуск приложения 'калькулятор'")#to do сделать калькулятор
+    print("ввод данных пользователя")
+    print("вывод результата")
+start_computer()
+
