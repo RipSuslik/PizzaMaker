@@ -133,11 +133,23 @@ def turn_on_hardware():
     _model("включение дисплея", 1)
 
 
-def start_computer():
+def start_computer(): #вынести авторизацию в отдельную функцию с системными сообщениями модел 
     turn_on_hardware()
     _model("загрузка ОС", 0)
     _model("авторизация пользователя", 0)
+    print("начать авторизацию?")
+    autorization = input("Д/н   ")
+    yes = "Д"
+    no = "н"
+    if autorization == yes:
+        _model("загружаем данные", 0)
+        i = 0
+        while i < 10001:
+            print (i)
+            i = i + 1
     user_authorized = False
+    _model("авторнизация завершена", 0)
+    _model("общая загрузка", 0)
     while not user_authorized:
         password_input = input("введите пароль: ")
         password = "12345"
@@ -146,12 +158,13 @@ def start_computer():
             user_authorized = True
         else: 
             print("неправильный пароль попробуйте еще раз")
+            
 
 
 
-    _model("загрузка учетной записи")
-    _model("выбор приложения")
-    _model("запуск приложения 'калькулятор'")#to do сделать калькулятор
+    _model("загрузка учетной записи", 0)
+    _model("выбор приложения", 0)
+    _model("запуск приложения 'калькулятор'", 0)#to do сделать калькулятор
     start_calculator()
         
 start_computer()
