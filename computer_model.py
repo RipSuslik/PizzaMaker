@@ -99,16 +99,16 @@ def give_div(a, b):
             return i 
 
 def start_calculator():
-    _model("ввод данных")    
+    _model("ввод данных", 0)    
     text_A = input("введите число А: ")
     text_B = input("введите число Б: ")
 
-    _model("обработка данных пользователя")
+    _model("обработка данных пользователя", 0)
     A = int(text_A)
     B = int(text_B)
     Result = A + B
     
-    _model("вывод результата")
+    _model("вывод результата", 0)
     print("Сумма равна: ", Result)
 
 def _model(str, lvl):
@@ -147,9 +147,8 @@ def start_computer(): #вынести авторизацию в отдельну
         while i < 10001:
             print (i)
             i = i + 1
+
     user_authorized = False
-    _model("авторнизация завершена", 0)
-    _model("общая загрузка", 0)
     while not user_authorized:
         password_input = input("введите пароль: ")
         password = "12345"
@@ -159,9 +158,6 @@ def start_computer(): #вынести авторизацию в отдельну
         else: 
             print("неправильный пароль попробуйте еще раз")
             
-
-
-
     _model("загрузка учетной записи", 0)
     _model("выбор приложения", 0)
     _model("запуск приложения 'калькулятор'", 0)#to do сделать калькулятор
