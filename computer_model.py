@@ -44,7 +44,7 @@
 
 
 
-
+import time
 
 def inc(a):
     return a + 1
@@ -132,22 +132,41 @@ def turn_on_hardware():
     _model("включение мышки", 1)
     _model("включение дисплея", 1)
 
-
-def start_computer(): #вынести авторизацию в отдельную функцию с системными сообщениями модел 
-    turn_on_hardware()
-    _model("загрузка ОС", 0)
+def authorization():
     _model("авторизация пользователя", 0)
     print("начать авторизацию?")
-    autorization = input("Д/н   ")
-    yes = "Д"
-    no = "н"
-    if autorization == yes:
-        _model("загружаем данные", 0)
+    autorization = input("Y/n:   ").lower()
+    yes = "y"                            
+    no = "n"
+    if autorization == yes or autorization == "":
         i = 0
-        while i < 10001:
-            print (i)
+        while i < 3:
             i = i + 1
+            print("                   ", end="\r")
+            print("загружаем данные.", end="\r")
+            time.sleep(1)
+            print("                   ", end="\r")
+            print("загружаем данные..", end="\r")
+            time.sleep(1)
+            print("                   ", end="\r")
+            print("загружаем данные...", end="\r")
+            time.sleep(1)
 
+        print("")
+        i = 0
+        while i < 100001:
+            print (i, end="\r")
+            i = i + 1
+        print("")
+        
+    elif autorization == no:
+        print("ошибка: авторизация не запущена")
+        return False
+    else: 
+        print("неправильный ввод")
+        return False
+    
+    print("загрузка данных завершена")
     user_authorized = False
     while not user_authorized:
         password_input = input("введите пароль: ")
@@ -157,11 +176,16 @@ def start_computer(): #вынести авторизацию в отдельну
             user_authorized = True
         else: 
             print("неправильный пароль попробуйте еще раз")
+    return user_authorized
+def start_computer(): 
+    turn_on_hardware()
+    _model("загрузка ОС", 0)
+    #написать отдельную ФУНКЦИЮ с загрузкой ОС
+    if authorization() == True:        
+        _model("загрузка учетной записи", 0)
+        _model("выбор приложения", 0)
+        _model("запуск приложения 'калькулятор'", 0)
+        start_calculator()
             
-    _model("загрузка учетной записи", 0)
-    _model("выбор приложения", 0)
-    _model("запуск приложения 'калькулятор'", 0)#to do сделать калькулятор
-    start_calculator()
-        
 start_computer()
 
