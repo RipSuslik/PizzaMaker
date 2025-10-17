@@ -131,6 +131,66 @@ def turn_on_hardware():
     _model("включение клавиатуры", 1)
     _model("включение мышки", 1)
     _model("включение дисплея", 1)
+def OC():
+    i = 0
+    while i < 1:
+            i = i + 1
+            print("                   ", end="\r")
+            print("запуск устройства.", end="\r")
+            time.sleep(1)
+            print("                   ", end="\r")
+            print("запуск устройства..", end="\r")
+            time.sleep(1)
+            print("                   ", end="\r")
+            print("запуск устройства...", end="\r")
+            time.sleep(1)
+    i = 0
+    while i < 1:
+            i = i + 1
+            print("                   ", end="\r")
+            print("запуск BIOS.", end="\r")
+            time.sleep(1)
+            print("                   ", end="\r")
+            print("запуск BIOS..", end="\r")
+            time.sleep(1)
+            print("                   ", end="\r")
+            print("запуск BIOS...", end="\r")
+            time.sleep(1)
+    i = 0
+    while i < 1:
+            i = i + 1
+            print("                   ", end="\r")
+            print("запуск UEFI.", end="\r")
+            time.sleep(1)
+            print("                   ", end="\r")
+            print("запуск UEFI..", end="\r")
+            time.sleep(1)
+            print("                   ", end="\r")
+            print("запуск UEFI...", end="\r")
+            time.sleep(1)
+
+    _model("запуск загрузчика", 1)
+
+    i = 0
+    while i < 1:
+            i = i + 1
+            print("                   ", end="\r")
+            print("проверка загрузчика.", end="\r")
+            time.sleep(0.2)
+            print("                   ", end="\r")
+            print("проверка загрузчика..", end="\r")
+            time.sleep(0.2)
+            print("                   ", end="\r")
+            print("проверка загрузчика...", end="\r")
+            time.sleep(0.2)
+
+    print("загрузчик исправен")
+    _model("подключение файловой системы", 1)
+    _model("запуск ядра ОС", 1)
+    _model("запуск служб", 1)
+    _model("включение системы входа пользователя в систему", 1)
+    print("подождите")
+    time.sleep(5)
 
 def authorization():
     _model("авторизация пользователя", 0)
@@ -180,7 +240,7 @@ def authorization():
 def start_computer(): 
     turn_on_hardware()
     _model("загрузка ОС", 0)
-    #написать отдельную ФУНКЦИЮ с загрузкой ОС
+    OC()
     if authorization() == True:        
         _model("загрузка учетной записи", 0)
         _model("выбор приложения", 0)

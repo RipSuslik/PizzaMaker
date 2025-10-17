@@ -76,7 +76,6 @@ def your_name():
 #Ввод чисел
 def calculator():
     text_A = input("введите число А: ")
-
     text_B = input("введите число Б: ")
 
     A = int(text_A)
