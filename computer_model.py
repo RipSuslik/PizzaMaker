@@ -147,7 +147,7 @@ def OC():
     i = 0
     while i < 1:
             i = i + 1
-            print("                   ", end="\r")
+            print("                          ", end="\r")
             print("запуск BIOS.", end="\r")
             time.sleep(1)
             print("                   ", end="\r")
@@ -172,17 +172,19 @@ def OC():
     _model("запуск загрузчика", 1)
 
     i = 0
-    while i < 1:
+    while i < 3:
             i = i + 1
-            print("                   ", end="\r")
+            print("                         ", end="\r")
             print("проверка загрузчика.", end="\r")
             time.sleep(0.2)
-            print("                   ", end="\r")
+            print("                         ", end="\r")
             print("проверка загрузчика..", end="\r")
             time.sleep(0.2)
             print("                   ", end="\r")
             print("проверка загрузчика...", end="\r")
             time.sleep(0.2)
+            print("                        ", end="\r")
+            
 
     print("загрузчик исправен")
     _model("подключение файловой системы", 1)
@@ -192,24 +194,24 @@ def OC():
     print("подождите")
     time.sleep(5)
 
-def authorization():
-    _model("авторизация пользователя", 0)
-    print("начать авторизацию?")
-    autorization = input("Y/n:   ").lower()
+def load_user_data():
+    print("загрузить даннные пользователя?")
+
+    need_to_load = input("Y/n:   ").lower()
     yes = "y"                            
     no = "n"
-    if autorization == yes or autorization == "":
+    if need_to_load == yes or need_to_load == "":
         i = 0
         while i < 3:
             i = i + 1
-            print("                   ", end="\r")
-            print("загружаем данные.", end="\r")
+            print("                                          ", end="\r")
+            print("загружаем пользовательские данные"+".", end="\r")
             time.sleep(1)
-            print("                   ", end="\r")
-            print("загружаем данные..", end="\r")
+            print("                                             ", end="\r")
+            print("загружаем пользовательские данные..", end="\r")
             time.sleep(1)
-            print("                   ", end="\r")
-            print("загружаем данные...", end="\r")
+            print("                                           ", end="\r")
+            print("загружаем пользовательские данные...", end="\r")
             time.sleep(1)
 
         print("")
@@ -219,14 +221,18 @@ def authorization():
             i = i + 1
         print("")
         
-    elif autorization == no:
-        print("ошибка: авторизация не запущена")
+    elif need_to_load == no:
+        print("данные не загружены, некоторые программмы не будут работать")
         return False
     else: 
         print("неправильный ввод")
         return False
     
     print("загрузка данных завершена")
+
+def authorization():
+    _model("авторизация пользователя", 0)
+   
     user_authorized = False
     while not user_authorized:
         password_input = input("введите пароль: ")
@@ -241,8 +247,10 @@ def start_computer():
     turn_on_hardware()
     _model("загрузка ОС", 0)
     OC()
-    if authorization() == True:        
+    user_authorized = authorization()
+    if  user_authorized:        
         _model("загрузка учетной записи", 0)
+        load_user_data()
         _model("выбор приложения", 0)
         _model("запуск приложения 'калькулятор'", 0)
         start_calculator()
