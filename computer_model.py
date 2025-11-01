@@ -99,100 +99,64 @@ def give_div(a, b):
             return i 
 
 def start_calculator():
-    _model("ввод данных", 0)    
+    _model_process("ввод данных", 0)    
     text_A = input("введите число А: ")
     text_B = input("введите число Б: ")
 
-    _model("обработка данных пользователя", 0)
+    _model_process("обработка данных пользователя", 0)
     A = int(text_A)
     B = int(text_B)
     Result = A + B
     
-    _model("вывод результата", 0)
+    _model_process("вывод результата", 0)
     print("Сумма равна: ", Result)
 
-def _model(str, lvl):
+def _model_process(process_name, lvl, seconds, repeat):
     if lvl == 1:
         offset = "    "
     else: 
         offset = ""
-    print(offset + "[" + str + "]")
-    
+    i = 0
+    while i < repeat:
+            i = i + 1
+            
+            print("                                     ", end="\r")
+            print(process_name + ".", end="\r")
+            time.sleep(seconds)
+            print("                                     ", end="\r")
+            print(process_name + "..", end="\r")
+            time.sleep(seconds)
+            print("                                     ", end="\r")
+            print(process_name + "...", end="\r")
+            time.sleep(seconds)
+
+    print(offset + "[" + process_name + "]")   
 
 def turn_on_hardware():
-    _model("включение оборудования", 0)
-    _model("включение материнской платы", 1)
-    _model("включение процессора", 1)
-    _model("включение оперативной памяти", 1)
-    _model("включение сетевой карты", 1)
-    _model("включение жесткого диска", 1)
-    _model("включение кулера", 1)
-    _model("включение видеокарты", 1)
-    _model("включение клавиатуры", 1)
-    _model("включение мышки", 1)
-    _model("включение дисплея", 1)
-def OC():
-    i = 0
-    while i < 1:
-            i = i + 1
-            print("                   ", end="\r")
-            print("запуск устройства.", end="\r")
-            time.sleep(1)
-            print("                   ", end="\r")
-            print("запуск устройства..", end="\r")
-            time.sleep(1)
-            print("                   ", end="\r")
-            print("запуск устройства...", end="\r")
-            time.sleep(1)
-    i = 0
-    while i < 1:
-            i = i + 1
-            print("                          ", end="\r")
-            print("запуск BIOS.", end="\r")
-            time.sleep(1)
-            print("                   ", end="\r")
-            print("запуск BIOS..", end="\r")
-            time.sleep(1)
-            print("                   ", end="\r")
-            print("запуск BIOS...", end="\r")
-            time.sleep(1)
-    i = 0
-    while i < 1:
-            i = i + 1
-            print("                   ", end="\r")
-            print("запуск UEFI.", end="\r")
-            time.sleep(1)
-            print("                   ", end="\r")
-            print("запуск UEFI..", end="\r")
-            time.sleep(1)
-            print("                   ", end="\r")
-            print("запуск UEFI...", end="\r")
-            time.sleep(1)
+    _model_process("включение оборудования", 0, 1, 1)
+    _model_process("включение материнской платы", 1)
+    _model_process("включение процессора", 1)
+    _model_process("включение оперативной памяти", 1)
+    _model_process("включение сетевой карты", 1)
+    _model_process("включение жесткого диска", 1)
+    _model_process("включение кулера", 1)
+    _model_process("включение видеокарты", 1)
+    _model_process("включение клавиатуры", 1)
+    _model_process("включение мышки", 1)
+    _model_process("включение дисплея", 1)
 
-    _model("запуск загрузчика", 1)
 
-    i = 0
-    while i < 3:
-            i = i + 1
-            print("                         ", end="\r")
-            print("проверка загрузчика.", end="\r")
-            time.sleep(0.2)
-            print("                         ", end="\r")
-            print("проверка загрузчика..", end="\r")
-            time.sleep(0.2)
-            print("                   ", end="\r")
-            print("проверка загрузчика...", end="\r")
-            time.sleep(0.2)
-            print("                        ", end="\r")
-            
-
+def load_OS():
+    _model_process("запуск устройства", 1, 1, 1, 1, 1)
+    _model_process("запуск BIOS", 1, 1)
+    _model_process("запуск UEFI", 1, 1)
+    _model_process("запуск загрузчика", 1)
+    _model_process("проверка загрузчика", 0.2, 5)
     print("загрузчик исправен")
-    _model("подключение файловой системы", 1)
-    _model("запуск ядра ОС", 1)
-    _model("запуск служб", 1)
-    _model("включение системы входа пользователя в систему", 1)
-    print("подождите")
-    time.sleep(5)
+    _model_process("подключение файловой системы", 1)
+    _model_process("запуск ядра ОС", 1)
+    _model_process("запуск служб", 1)
+    _model_process("включение системы входа пользователя в систему", 1)
 
 def load_user_data():
     print("загрузить даннные пользователя?")
@@ -201,18 +165,7 @@ def load_user_data():
     yes = "y"                            
     no = "n"
     if need_to_load == yes or need_to_load == "":
-        i = 0
-        while i < 3:
-            i = i + 1
-            print("                                          ", end="\r")
-            print("загружаем пользовательские данные"+".", end="\r")
-            time.sleep(1)
-            print("                                             ", end="\r")
-            print("загружаем пользовательские данные..", end="\r")
-            time.sleep(1)
-            print("                                           ", end="\r")
-            print("загружаем пользовательские данные...", end="\r")
-            time.sleep(1)
+        _model_process("загружаем пользовательские данные", 1, 2)
 
         print("")
         i = 0
@@ -231,7 +184,7 @@ def load_user_data():
     print("загрузка данных завершена")
 
 def authorization():
-    _model("авторизация пользователя", 0)
+    _model_process("авторизация пользователя", 0)
    
     user_authorized = False
     while not user_authorized:
@@ -245,14 +198,14 @@ def authorization():
     return user_authorized
 def start_computer(): 
     turn_on_hardware()
-    _model("загрузка ОС", 0)
-    OC()
+    _model_process("загрузка ОС", 0)
+    load_OS()
     user_authorized = authorization()
     if  user_authorized:        
-        _model("загрузка учетной записи", 0)
+        _model_process("загрузка учетной записи", 0)
         load_user_data()
-        _model("выбор приложения", 0)
-        _model("запуск приложения 'калькулятор'", 0)
+        _model_process("выбор приложения", 0)
+        _model_process("запуск приложения 'калькулятор'", 0)
         start_calculator()
             
 start_computer()
